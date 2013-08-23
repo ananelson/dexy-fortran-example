@@ -1,3 +1,5 @@
 *.o
 *.mod
 dexy-fortran-example
+.dexy/
+output/

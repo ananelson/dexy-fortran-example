@@ -1,0 +1,23 @@
+Makefile|make:
+    fortran-includes
+
+fortran-includes:
+    - .f
+    - .f90
+
+main.f90|fortran:
+    - fortran-includes
+    - fortran: { check-return-code: True, compiler-args: "-c -g -I. -I./include -W -Wall -fcheck=all -pedantic-errors -Wunderflow -ffpe-trap=invalid,zero,overflow" }
+
+f77_example.f|fortran:
+    - fortran-includes
+    - fortran: { compiler-args: "-c -g -I. -I./include -W -Wall -fcheck=all -pedantic-errors -Wunderflow -ffpe-trap=invalid,zero,overflow" }
+
+source:
+    - .f|idio
+    - .f90|idio
+
+docs.md|jinja|markdown|easyhtml:
+    - main.f90|fortran
+    - f77_example.f|fortran
+    - source
